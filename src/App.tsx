@@ -36,10 +36,17 @@ const App: React.FC = () => {
     document.body.removeChild(a);
   }, [data]);
 
+  const onTextUpdate = useCallback<
+    React.ChangeEventHandler<HTMLTextAreaElement>
+  >((ev) => {
+    const data = ev.target.value;
+    setData(data);
+  }, []);
+
   return (
     <div>
       <input type="file" id="save-input" onChange={onUpload} />
-      <textarea value={data}></textarea>
+      <textarea value={data} onChange={onTextUpdate}></textarea>
       <button type="button" onClick={doDownload}>
         Download
       </button>
